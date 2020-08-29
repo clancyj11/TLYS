@@ -1,0 +1,235 @@
+---
+title: "2019_QB_Breakdown"
+author: "Joey Clancy"
+date: "8/28/2020"
+output: 
+  html_document:
+    code_download: true
+    toc: true
+    toc_float: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Setup and Preprocessing
+```{r clear-environment, echo = FALSE}
+# Clear environment of variables and functions
+rm(list = ls(all = TRUE))
+
+# Clear environmet of packages
+if (is.null(sessionInfo()$otherPkgs) == FALSE) lapply(paste("package:", names(sessionInfo()$otherPkgs), sep = ""), detach, character.only = TRUE, unload = TRUE)
+```
+
+## Load Necessary Packages
+```{r package-load, message=FALSE}
+library(ggplot2)
+library(dplyr)
+library(patchwork)
+library(kableExtra)
+library(plotly)
+library(stringr)
+```
+
+## Import Data
+```{r data-load}
+basic_passing <- read.csv("2019_QB_Passing.csv")
+adv_accuracy <- read.csv("2019_QB_Accuracy.csv")
+adv_air_yards <- read.csv("2019_QB_Air_Yardage.csv")
+adv_play_type <- read.csv("2019_QB_Play_Type.csv")
+adv_pressure <- read.csv("2019_QB_Pressure.csv")
+```
+
+## Clean Data
+```{r cleaning}
+# Create vector of vars to be converted to factors
+names <- c('Player' ,'Tm', 'Pos')
+
+# Create factor variables from all data
+basic_passing[,names] <- lapply(basic_passing[,names] , factor)
+adv_accuracy[,names] <- lapply(adv_accuracy[,names] , factor)
+adv_air_yards[,names] <- lapply(adv_air_yards[,names] , factor)
+adv_pressure[,names] <- lapply(adv_pressure[,names] , factor)
+adv_play_type[,names] <- lapply(adv_play_type[,names] , factor)
+
+# Get rid of players that don't play the QB position
+adv_air_yards <- subset(adv_air_yards, Pos != "wr" & Pos != "")
+adv_pressure <- subset(adv_pressure, Pos != "wr" & Pos != "")
+adv_play_type <- subset(adv_play_type, Pos != "wr" & Pos != "")
+
+```
+
+## Histogram-Boxplot Pair Function
+```{r}
+# Creating a function to plot histogram and box plot at the same time
+histPlusBox <- function(data, vbl) {
+  histogram <- ggplot(data = data, mapping = aes(x = {{ vbl }})) +
+    geom_histogram(bins = 30)
+
+  boxplot <- ggplot(data = data, mapping = aes(x = 0)) +
+    geom_boxplot(mapping = aes(y = {{ vbl }})) +
+    coord_flip()
+
+  histogram / boxplot
+}
+```
+
+# Summaries
+## Standard Passing Stats
+```{r}
+summary(basic_passing)
+```
+
+## Accuracy
+```{r}
+summary(adv_accuracy)
+```
+
+## Air Yardage
+```{r}
+summary(adv_air_yards)
+```
+
+## Play Type
+```{r}
+summary(adv_play_type)
+```
+
+## Pressure
+```{r}
+summary(adv_pressure)
+```
+
+# Univariate Graphical Analysis
+## Numeric Variables
+
+### Completion Rate
+```{r}
+histPlusBox(basic_passing, CmpRate)
+```
+
+### Touchdown Rate
+```{r}
+histPlusBox(basic_passing, TD_Rate)
+```
+
+### Interception Rate
+```{r}
+histPlusBox(basic_passing, IntRate)
+```
+
+### Sack Rate
+```{r}
+histPlusBox(basic_passing, SkRate)
+```
+
+### 4th Quarter Comebacks
+```{r}
+histPlusBox(basic_passing, X4QC)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
