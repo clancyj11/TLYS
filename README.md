@@ -1,2 +1,3 @@
 # TLYS
-Sorted by show number. Each folder contains data and scripts regarding football and/or basketball statistics. Used mostly for reference, but also for fun!
+The GitHub home for all data and insights gathered for TLYS. This repository is sorted by the show number for which the data used. Most scripts will be in RMarkdown, however, there may be the occasional Python file when machine learning in employed. 
+The data itself concerns either football or basketball, depending on the particular episode.
