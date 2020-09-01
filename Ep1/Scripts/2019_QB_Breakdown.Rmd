@@ -64,15 +64,15 @@ adv_play_type <- subset(adv_play_type, Pos != "wr" & Pos != "")
 ## Histogram-Boxplot Pair Function
 ```{r}
 # Creating a function to plot histogram and box plot at the same time
-histPlusBox <- function(data, vbl) {
-  histogram <- ggplot(data = data, mapping = aes(x = {{ vbl }})) +
-    geom_histogram(bins = 30)
+densityBox <- function(data, vbl) {
+  density <- ggplot(data = data, mapping = aes(x = {{ vbl }})) +
+    geom_density()
 
   boxplot <- ggplot(data = data, mapping = aes(x = 0)) +
     geom_boxplot(mapping = aes(y = {{ vbl }})) +
     coord_flip()
 
-  histogram / boxplot
+  density / boxplot
 }
 ```
 
@@ -107,42 +107,183 @@ summary(adv_pressure)
 
 ### Completion Rate
 ```{r}
-histPlusBox(basic_passing, CmpRate)
+densityBox(basic_passing, CmpRate)
 ```
 
 ### Touchdown Rate
 ```{r}
-histPlusBox(basic_passing, TD_Rate)
+densityBox(basic_passing, TD_Rate)
 ```
 
 ### Interception Rate
 ```{r}
-histPlusBox(basic_passing, IntRate)
+densityBox(basic_passing, IntRate)
 ```
 
 ### Sack Rate
 ```{r}
-histPlusBox(basic_passing, SkRate)
+densityBox(basic_passing, SkRate)
 ```
 
 ### 4th Quarter Comebacks
-```{r}
-histPlusBox(basic_passing, X4QC)
+```{r message=FALSE, warning=FALSE}
+densityBox(basic_passing, X4QC)
 ```
 
+### Game Winning Drives
+```{r warning = FALSE}
+densityBox(basic_passing, GWD)
+```
 
+### Yards per Attempt
+```{r}
+densityBox(basic_passing, Y.A)
+```
 
+### Drops
+```{r}
+densityBox(adv_accuracy, Drops)
+```
 
+### Drop Rate
+```{r}
+densityBox(adv_accuracy, DropRate)
+```
 
+### Bad Throws
+```{r}
+densityBox(adv_accuracy, BadTh)
+```
 
+### Bad Throw Rate
+```{r}
+densityBox(adv_accuracy, BadRate)
+```
 
+### On-Target Passes
+```{r}
+densityBox(adv_accuracy, OnTgt)
+```
 
+### On-Target Rate
+```{r}
+densityBox(adv_accuracy, OnTgtRate)
+```
 
+### RPO Plays
+```{r}
+densityBox(adv_play_type, RPO_Plays)
+```
 
+### RPO Yards
+```{r}
+densityBox(adv_play_type, RPO_Yds)
+```
 
+### RPO Pass Attempts
+```{r}
+densityBox(adv_play_type, RPO_PassAtt)
+```
 
+### RPO Pass Yards
+```{r}
+densityBox(adv_play_type, RPO_PassYds)
+```
 
+### RPO Rush Attempts
+```{r}
+densityBox(adv_play_type, RPO_RushAtt)
+```
 
+### RPO Rush Yards
+```{r}
+densityBox(adv_play_type, RPO_RushYds)
+```
+
+### Play Action Pass Attempts
+```{r}
+densityBox(adv_play_type, PA_PassAtt)
+```
+
+### Play Action Rush Attempts
+```{r}
+densityBox(adv_play_type, PA_PassYds)
+```
+
+### Intended Air Yards
+```{r}
+densityBox(adv_air_yards, IAY)
+```
+
+### Intended Air Yards per Attempt
+```{r}
+densityBox(adv_air_yards, IAY.PA)
+```
+
+### Completed Air Yards
+```{r}
+densityBox(adv_air_yards, CAY)
+```
+
+### Completed Air Yards per Completion
+```{r}
+densityBox(adv_air_yards, CAY.Cmp)
+```
+
+### Completed Air Yards per Pass Attempt
+```{r}
+densityBox(adv_air_yards, CAY.PA)
+```
+
+### Pass Yards After Catch
+```{r}
+densityBox(adv_air_yards, YAC)
+```
+
+### Yards After Catch per Completion
+```{r}
+densityBox(adv_air_yards, YAC.Cmp)
+```
+
+### Pocket Time
+```{r}
+densityBox(adv_pressure, PktTime)
+```
+
+### Blitz Count
+```{r}
+densityBox(adv_pressure, BltzCount)
+```
+
+### Times Hurried
+```{r}
+densityBox(adv_pressure, Hrry)
+```
+
+### Times Hit while Passing
+```{r}
+densityBox(adv_pressure, Hits)
+```
+
+### Times Pressured
+```{r}
+densityBox(adv_pressure, Prss)
+```
+
+### Pressure Rate
+```{r}
+densityBox(adv_pressure, PrssRate)
+```
+
+### Scrambles
+```{r}
+densityBox(adv_pressure, Scrm)
+```
+
+### Yards per Scramble
+```{r warning=FALSE}
+densityBox(adv_pressure, Yds.Scr)
+```
 
 
 
